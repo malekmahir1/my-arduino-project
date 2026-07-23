@@ -1,0 +1,30 @@
+name: Compile Arduino Sketch
+
+on: [push, workflow_dispatch]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Compile Sketch
+        uses: arduino/compile-sketches@v1
+        with:
+          fqbn: "esp32:esp32:esp32"
+          platforms: |
+            - name: "esp32:esp32"
+              source-url: "https://githubusercontent.com"
+          libraries: |
+            - name: "Blynk"
+          enable-deltas-report: false
+          sketch-paths: |
+            ./
+
+      - name: Upload Binary Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: compiled-binary
+          path: |
+            **/*.bin
