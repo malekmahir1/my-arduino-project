@@ -18,6 +18,7 @@ jobs:
               source-url: "https://githubusercontent.com"
           libraries: |
             - name: "Blynk"
+            - name: "WiFi"
           enable-deltas-report: false
           sketch-paths: |
             ./
@@ -27,5 +28,6 @@ jobs:
         with:
           name: compiled-binary
           path: |
-            **/*.bin
+            ./build/**/*.bin
+            ./**/*.bin
             
